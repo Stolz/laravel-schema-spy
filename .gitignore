@@ -1,0 +1,9 @@
+/vendor
+composer.phar
+composer.lock
+.DS_Store
+
+# Old files
+*~
+.*~
+*.kate-swp
