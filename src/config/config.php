@@ -20,6 +20,9 @@ return array(
 	 | Directory where generated files will be written
 	 |--------------------------------------------------------------------------
 	 |
+	 | NOTE: For security reasons, setting this option to any path within your
+	 | public_path() directory will be a really bad idea.
+	 |
 	 | Default: app_path('database/schema')
 	 |
 	 */
@@ -38,11 +41,9 @@ return array(
 	|
 	*/
 
-	/*
-	'arguments' => [
+	/*'arguments' => [
 		'-t'	=> 'mysql',
 		'-dp'	=> '/mysql/mysql-connector-java-5.1.30-bin.jar', // download from http://dev.mysql.com/downloads/connector/j/
 		'-hq'	=> null,
-	],
-	*/
+	],*/
 );
