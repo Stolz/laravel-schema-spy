@@ -1,0 +1,25 @@
+{
+	"name": "stolz/laravel-schema-spy",
+	"description": "Laravel artisan command that uses JAVA schemaSpy tool to generate a graphical representation of a database schema",
+	"keywords": ["laravel", "database", "sql", "schema", "schema-spy", "schemaspy", "er diagram"],
+	"authors": [
+		{
+			"name": "Stolz",
+			"homepage": "https://github.com/Stolz/laravel-schema-spy",
+			"role": "developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0",
+		"illuminate/support": "4.1.*"
+	},
+	"autoload": {
+		"psr-0": {
+			"Stolz\\SchemaSpy": "src/"
+		}
+	},
+	"minimum-stability": "dev",
+	"license": "MIT"
+}
+
+
