@@ -18,7 +18,7 @@ class Command extends \Illuminate\Console\Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Generates a database report using http://schemaspy.sourceforge.net';
+	protected $description = 'Generate a database report using http://schemaspy.sourceforge.net';
 
 	/**
 	 * Default command to run schemaSpy.jar
