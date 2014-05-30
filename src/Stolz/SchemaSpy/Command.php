@@ -4,7 +4,8 @@
 use Symfony\Component\Console\Input\InputArgument;
 use Config;
 
-class Command extends \Illuminate\Console\Command {
+class Command extends \Illuminate\Console\Command
+{
 
 	/**
 	 * The console command name.
@@ -131,5 +132,4 @@ class Command extends \Illuminate\Console\Command {
 // 			array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
 		);
 	}
-
 }

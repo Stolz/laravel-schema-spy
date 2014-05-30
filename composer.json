@@ -13,10 +13,16 @@
 		"php": ">=5.4.0",
 		"illuminate/support": "4.1.*"
 	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "2.*"
+	},
 	"autoload": {
 		"psr-0": {
 			"Stolz\\SchemaSpy": "src/"
 		}
+	},
+	"config": {
+		"preferred-install": "dist"
 	},
 	"minimum-stability": "dev",
 	"license": "MIT"

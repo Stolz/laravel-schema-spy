@@ -1,6 +1,7 @@
 <?php namespace Stolz\SchemaSpy;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider {
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
+{
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -28,8 +29,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	public function register()
 	{
 		// Bind 'stolz.schemaspy.command.spy' component to the IoC container
-		$this->app->bind('stolz.schemaspy.command.spy', function($app)
-		{
+		$this->app->bind('stolz.schemaspy.command.spy', function ($app) {
 			return new Command();
 		});
 
@@ -46,5 +46,4 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	{
 		return array();
 	}
-
 }
