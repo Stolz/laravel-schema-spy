@@ -23,7 +23,7 @@ To get the latest version simply require it in your Laravel project `composer.js
 
 	composer require "stolz/laravel-schema-spy:dev-master" --dev
 
-Once the package is installed you need to register the service provider with the application. Open up `app/config/app.php` and find the `providers` key.
+Once the package is installed you need to register the service provider with the application. Open up `config/app.php` and find the `providers` key.
 
 	'providers' => array(
 		...
@@ -38,9 +38,9 @@ If no connection is provided Laravel's default one will be used. After successfu
 
 ## Configuration
 
-To configure the package use the following command to copy the configuration file to `app/config/packages/stolz/laravel-schema-spy/config.php`.
+To configure the package use the following command to copy the configuration file to `config/packages/stolz/laravel-schema-spy/config.php`.
 
-	php artisan config:publish stolz/laravel-schema-spy
+	php artisan publish:config stolz/laravel-schema-spy
 
 All available settings are included inside `config.php` and with the provided comments they should be self-explanatory.
 
