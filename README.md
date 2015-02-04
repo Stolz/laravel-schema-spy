@@ -1,6 +1,6 @@
 # Laravel SchemaSpy
 
-[Laravel SchemaSpy](https://github.com/Stolz/laravel-schema-spy) is a [Laravel artisan command](http://laravel.com/docs/commands) that acts as an interface for the program [SchemaSpy](http://schemaspy.sourceforge.net). With SchemaSpy you can analyze the schema metadata of a database and generate browser readable files with useful information such:
+[Laravel SchemaSpy](https://github.com/Stolz/laravel-schema-spy) is a [Laravel artisan command](http://laravel.com/docs/master/commands) that acts as an interface for the program [SchemaSpy](http://schemaspy.sourceforge.net). With SchemaSpy you can analyze the schema metadata of a database and generate browser readable files with useful information such:
 
 - Visual ER diagram.
 - Proper table insertion/deletion order for database migrations.
@@ -19,9 +19,9 @@ Graphvis is not required to view the output, only the `dot` command that is used
 
 ## Installation
 
-To get the latest version simply require it in your Laravel project `composer.json` file by running:
+Install via [Composer](https://getcomposer.org/)
 
-	composer require "stolz/laravel-schema-spy:dev-master" --dev
+	composer require stolz/laravel-schema-spy --dev
 
 Once the package is installed you need to register the service provider with the application. Open up `config/app.php` and find the `providers` key.
 
@@ -38,11 +38,11 @@ If no connection is provided Laravel's default one will be used. After successfu
 
 ## Configuration
 
-To configure the package use the following command to copy the configuration file to `config/packages/stolz/laravel-schema-spy/config.php`.
+To configure the package use the following command to copy the configuration file to `config/spy.php`.
 
-	php artisan publish:config stolz/laravel-schema-spy
+	php artisan vendor:publish
 
-All available settings are included inside `config.php` and with the provided comments they should be self-explanatory.
+All available settings are included inside `spy.php` and with the provided comments they should be self-explanatory.
 
 ## License
 

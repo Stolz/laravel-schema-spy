@@ -1,12 +1,10 @@
 <?php namespace Stolz\SchemaSpy;
 
-// use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Console\Command as ConsoleCommand;
 use Symfony\Component\Console\Input\InputArgument;
-use Config;
 
-class Command extends \Illuminate\Console\Command
+class Command extends ConsoleCommand
 {
-
 	/**
 	 * The console command name.
 	 *
@@ -22,13 +20,6 @@ class Command extends \Illuminate\Console\Command
 	protected $description = 'Generate a database report using http://schemaspy.sourceforge.net';
 
 	/**
-	 * Default command to run schemaSpy.jar
-	 *
-	 * @var string
-	 */
-	protected $command = 'java -jar schemaSpy.jar';
-
-	/**
 	 * Parameters passed to schemaSpy.jar
 	 *
 	 * @var array
@@ -36,28 +27,18 @@ class Command extends \Illuminate\Console\Command
 	protected $parameters = [];
 
 	/**
-	 * Create a new command instance
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	/**
 	 * Set parameters from config file
 	 *
-	 * @return SchemaSpyCommand
+	 * @return Command
 	 */
 	protected function setParametersFromConfig()
 	{
 		// Set output dir parameter
-		$this->parameters['-o'] = Config::get('laravel-schema-spy::output', app_path('database/schema'));
+		$this->parameters['-o'] = config('spy.output', app_path('database/schema'));
 
 		// Set database connection parameters
-		$connections = Config::get('database.connections', []);
-		$connection = ($this->argument('connection')) ?: Config::get('database.default');
+		$connections = config('database.connections', []);
+		$connection = ($this->argument('connection')) ?: config('database.default');
 		if(isset($connections[$connection]))
 		{
 			$this->info("Using '$connection' connection");
@@ -81,7 +62,7 @@ class Command extends \Illuminate\Console\Command
 	public function fire()
 	{
 		// Merge automatic parameters with user configurable parameters
-		$this->parameters = array_merge($this->setParametersFromConfig()->parameters, Config::get('laravel-schema-spy::arguments', []));
+		$this->parameters = array_merge($this->setParametersFromConfig()->parameters, config('spy.arguments', []));
 
 		// Ask for missing mandatory parameters
 		if( ! isset($this->parameters['-db']))
@@ -91,7 +72,7 @@ class Command extends \Illuminate\Console\Command
 			$this->parameters['-u'] = $this->ask('Enter database username');
 
 		// Build command
-		$command = Config::get('laravel-schema-spy::command', $this->command);
+		$command = config('spy.command', 'java -jar schemaSpy.jar');
 		foreach($this->parameters as $key => $value)
 			$command .= " $key $value";
 
@@ -118,18 +99,6 @@ class Command extends \Illuminate\Console\Command
 	{
 		return array(
 			array('connection', InputArgument::OPTIONAL, 'Database connection name'),
-		);
-	}
-
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return array(
-// 			array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
 		);
 	}
 }

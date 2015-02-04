@@ -17,8 +17,8 @@
 		"squizlabs/php_codesniffer": "2.*"
 	},
 	"autoload": {
-		"psr-0": {
-			"Stolz\\SchemaSpy": "src/"
+		"psr-4": {
+			"Stolz\\SchemaSpy\\": "src/"
 		}
 	},
 	"config": {

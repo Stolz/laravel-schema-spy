@@ -4,19 +4,6 @@ return array(
 
 	/*
 	 |--------------------------------------------------------------------------
-	 | Base command to run schemaSpy.jar on your system
-	 |--------------------------------------------------------------------------
-	 |
-	 | No parametes here, instead use 'arguments' array below!
-	 |
-	 | Default: java -jar schemaSpy.jar
-	 |
-	 */
-
-	//'command' => 'java -jar schemaSpy.jar',
-
-	/*
-	 |--------------------------------------------------------------------------
 	 | Directory where generated files will be written
 	 |--------------------------------------------------------------------------
 	 |
@@ -27,7 +14,20 @@ return array(
 	 |
 	 */
 
-	//'output' => app_path('database/schema'),
+	'output' => app_path('database/schema'),
+
+	/*
+	 |--------------------------------------------------------------------------
+	 | Base command to run schemaSpy.jar on your system
+	 |--------------------------------------------------------------------------
+	 |
+	 | No parameters here, instead use 'arguments' array below!
+	 |
+	 | Default: java -jar schemaSpy.jar
+	 |
+	 */
+
+	'command' => 'java -jar schemaSpy.jar',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,9 +41,9 @@ return array(
 	|
 	*/
 
-	/*'arguments' => [
-		'-t'	=> 'mysql',
-		'-dp'	=> '/mysql/mysql-connector-java-5.1.30-bin.jar', // download from http://dev.mysql.com/downloads/connector/j/
-		'-hq'	=> null,
-	],*/
+	'arguments' => [
+		'-t'  => 'mysql',
+		'-dp' => '/path/to/mysql-connector-java-5.1.30-bin.jar', // download from http://dev.mysql.com/downloads/connector/j/
+		'-hq' => null,
+	],
 );
