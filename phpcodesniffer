@@ -21,14 +21,14 @@ done
 cd vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/ || exit_error "PHP_CodeSniffer not installed"
 if [ -d PHPCompatibility ]; then
 	cd PHPCompatibility
-	git pull
+	git pull -q
 else
-	git clone http://github.com/wimg/PHPCompatibility.git
+	git clone http://github.com/wimg/PHPCompatibility.git -q
 fi
 
 # Run PHP_CodeSniffer
 
 cd "$DIR"
-./vendor/bin/phpcs --report-width=100 --tab-width=4 --standard=phpcodesniffer.xml,PHPCompatibility src/ -as --runtime-set testVersion 5.4
+./vendor/bin/phpcs --report-width=100 --tab-width=4 --standard=phpcodesniffer.xml,PHPCompatibility src/ -as --runtime-set testVersion 5.3
 
 exit 0

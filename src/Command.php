@@ -43,10 +43,10 @@ class Command extends ConsoleCommand
 		{
 			$this->info("Using '$connection' connection");
 
-			$this->parameters['-host']	= $connections[$connection]['host'];
-			$this->parameters['-db']	= $connections[$connection]['database'];
-			$this->parameters['-u']		= $connections[$connection]['username'];
-			$this->parameters['-p']		= $connections[$connection]['password'];
+			$this->parameters['-host'] = $connections[$connection]['host'];
+			$this->parameters['-db']   = $connections[$connection]['database'];
+			$this->parameters['-u']    = $connections[$connection]['username'];
+			$this->parameters['-p']    = $connections[$connection]['password'];
 		}
 		else
 			$this->comment("Unknown connection '$connection'. Command will fail unless you provide DB credentials.");
