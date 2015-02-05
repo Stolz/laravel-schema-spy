@@ -5,13 +5,6 @@ use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 class ServiceProvider extends LaravelServiceProvider
 {
 	/**
-	 * Path to the default config file.
-	 *
-	 * @var string
-	 */
-	protected $configFile = __DIR__ . '/config.php';
-
-	/**
 	 * Register bindings in the container.
 	 *
 	 * @return void
@@ -19,7 +12,7 @@ class ServiceProvider extends LaravelServiceProvider
 	public function register()
 	{
 		// Merge user's configuration
-		$this->mergeConfigFrom($this->configFile, 'spy');
+		$this->mergeConfigFrom(__DIR__ . '/config.php', 'spy');
 
 		// Bind 'stolz.schemaspy.command.spy' component to the IoC container
 		$this->app->bind('stolz.schemaspy.command.spy', function ($app) {
@@ -36,12 +29,10 @@ class ServiceProvider extends LaravelServiceProvider
 	{
 		// Register paths to be published by 'vendor:publish' artisan command
 		$this->publishes([
-			$this->configFile => config_path('spy.php'),
+			__DIR__ . '/config.php' => config_path('spy.php'),
 		]);
 
 		// Add artisan command
 		$this->commands('stolz.schemaspy.command.spy');
 	}
-
-
 }
