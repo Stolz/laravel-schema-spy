@@ -1,5 +1,6 @@
 <?php namespace Stolz\SchemaSpy;
 
+use Config;
 use Illuminate\Console\Command as ConsoleCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -27,31 +28,43 @@ class Command extends ConsoleCommand
 	protected $parameters = [];
 
 	/**
-	 * Set parameters from config file
+	 * Set schemaspy command parameters.
 	 *
-	 * @return Command
+	 * @return array
 	 */
-	protected function setParametersFromConfig()
+	protected function setParameters()
 	{
-		// Set output dir parameter
-		$this->parameters['-o'] = config('spy.output', app_path('database/schema'));
+		$parameters = [];
 
-		// Set database connection parameters
-		$connections = config('database.connections', []);
-		$connection = ($this->argument('connection')) ?: config('database.default');
+		// Set output directory
+		$parameters['-o'] = Config::get('spy.output', app_path('database/schema'));
+
+		// Set database connection details
+		$connections = Config::get('database.connections', []);
+		$connection = ($this->argument('connection')) ?: Config::get('database.default');
 		if(isset($connections[$connection]))
 		{
 			$this->info("Using '$connection' connection");
 
-			$this->parameters['-host'] = $connections[$connection]['host'];
-			$this->parameters['-db']   = $connections[$connection]['database'];
-			$this->parameters['-u']    = $connections[$connection]['username'];
-			$this->parameters['-p']    = $connections[$connection]['password'];
+			$parameters['-host'] = $connections[$connection]['host'];
+			$parameters['-db']   = $connections[$connection]['database'];
+			$parameters['-u']    = $connections[$connection]['username'];
+			$parameters['-p']    = $connections[$connection]['password'];
 		}
 		else
 			$this->comment("Unknown connection '$connection'. Command will fail unless you provide DB credentials.");
 
-		return $this;
+		// Merge with user's parameters
+		$parameters = array_merge($parameters, Config::get('spy.parameters', []));
+
+		// Ask for missing mandatory parameters
+		if( ! isset($parameters['-db']))
+			$parameters['-db'] = $this->ask('Enter database name');
+
+		if( ! isset($parameters['-u']))
+			$parameters['-u'] = $this->ask('Enter database username');
+
+		return $this->parameters = $parameters;
 	}
 
 	/**
@@ -61,25 +74,19 @@ class Command extends ConsoleCommand
 	 */
 	public function fire()
 	{
-		// Merge automatic parameters with user configurable parameters
-		$this->parameters = array_merge($this->setParametersFromConfig()->parameters, config('spy.arguments', []));
-
-		// Ask for missing mandatory parameters
-		if( ! isset($this->parameters['-db']))
-			$this->parameters['-db'] = $this->ask('Enter database name');
-
-		if( ! isset($this->parameters['-u']))
-			$this->parameters['-u'] = $this->ask('Enter database username');
+		// Set schemaSpy parameters
+		$this->setParameters();
 
 		// Build command
-		$command = config('spy.command', 'java -jar schemaSpy.jar');
+		$command = Config::get('spy.command', 'java -jar schemaSpy.jar');
+
 		foreach($this->parameters as $key => $value)
 			$command .= " $key $value";
 
 		// Run command
 		exec($command, $output, $returnValue);
 
-		if($returnValue == 0)
+		if($returnValue === 0)
 			$this->info('Files successfully written to ' . $this->parameters['-o']);
 		else
 		{
@@ -97,8 +104,8 @@ class Command extends ConsoleCommand
 	 */
 	protected function getArguments()
 	{
-		return array(
-			array('connection', InputArgument::OPTIONAL, 'Database connection name'),
-		);
+		return [
+			['connection', InputArgument::OPTIONAL, 'Database connection name', Config::get('database.default')],
+		];
 	}
 }

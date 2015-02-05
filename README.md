@@ -44,7 +44,15 @@ To configure the package use the following command to copy the configuration fil
 
 All available settings are included inside `spy.php` and with the provided comments they should be self-explanatory.
 
+## Laravel 4
+
+If you are still using Laravel 4 instead of loading `Stolz\SchemaSpy\ServiceProvider` use `Stolz\SchemaSpy\LegacyServiceProvider` and manually copy the config file:
+
+	cp vendor/stolz/laravel-schema-spy/src/config.php app/config/spy.php
+
 ## License
 
 MIT License
-(c) [Stolz](https://github.com/Stolz)
+© [Stolz](https://github.com/Stolz)
+
+Read the provided `LICENSE` file for details.

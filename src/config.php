@@ -21,7 +21,7 @@ return array(
 	 | Base command to run schemaSpy.jar on your system
 	 |--------------------------------------------------------------------------
 	 |
-	 | No parameters here, instead use 'arguments' array below!
+	 | No parameters here, instead use the 'parameters' array below!
 	 |
 	 | Default: java -jar schemaSpy.jar
 	 |
@@ -31,17 +31,17 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Extra parametes to pass to the command
+	| Extra parameters to pass to the command
 	|--------------------------------------------------------------------------
 	|
-	| Database connection settings will be read form Laravel database config so
-	| there is no need to specify them here unless you want to override them.
+	| Database connection settings will be read form Laravel's database config
+	| file but they can be overridden here.
 	|
-	| Full list of possible arguments: http://schemaspy.sourceforge.net/
+	| Full list of possible parameters: http://schemaspy.sourceforge.net/
 	|
 	*/
 
-	'arguments' => [
+	'parameters' => [
 		'-t'  => 'mysql',
 		'-dp' => '/path/to/mysql-connector-java-5.1.30-bin.jar', // download from http://dev.mysql.com/downloads/connector/j/
 		'-hq' => null,
