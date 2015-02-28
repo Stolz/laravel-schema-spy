@@ -14,7 +14,7 @@ return array(
 	 |
 	 */
 
-	'output' => app_path('database/schema'),
+	'output' => base_path('database/schema'),
 
 	/*
 	 |--------------------------------------------------------------------------
