@@ -37,7 +37,7 @@ class Command extends ConsoleCommand
 		$parameters = [];
 
 		// Set output directory
-		$parameters['-o'] = Config::get('spy.output', app_path('database/schema'));
+		$parameters['-o'] = Config::get('spy.output', base_path('database/schema'));
 
 		// Set database connection details
 		$connections = Config::get('database.connections', []);
