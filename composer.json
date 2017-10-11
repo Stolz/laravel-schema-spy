@@ -26,6 +26,13 @@
 		"optimize-autoloader": true,
 		"preferred-install": "dist"
 	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Stolz\\SchemaSpy\\ServiceProvider"
+			]
+		}
+	},
 	"minimum-stability": "dev",
 	"license": "MIT"
 }

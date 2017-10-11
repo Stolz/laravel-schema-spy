@@ -72,7 +72,7 @@ class Command extends ConsoleCommand
 	 *
 	 * @return mixed
 	 */
-	public function fire()
+	public function handle()
 	{
 		// Set schemaSpy parameters
 		$this->setParameters();
